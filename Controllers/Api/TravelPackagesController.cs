@@ -104,22 +104,5 @@ namespace webapp_travel_agency.Controllers.Api
         {
             return _context.TravelPackages.Any(e => e.Id == id);
         }
-
-        [HttpGet]
-        public IActionResult GetTravelPackages(string? name)
-        {
-            IQueryable<TravelPackage> TravelDB;
-
-            if (name != null)
-            {
-                TravelDB = context.TravelPachage.Where(pizza => pizza.Name.ToLower().Contains(name.ToLower()));
-            }
-            else
-            {
-                TravelDB = context.Pizza;
-            }
-
-            return Ok(PizzaDB.ToList<Pizza>());
-        }
     }
 }

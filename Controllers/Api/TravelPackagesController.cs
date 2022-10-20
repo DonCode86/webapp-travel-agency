@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -22,11 +23,11 @@ namespace webapp_travel_agency.Controllers.Api
         }
 
         // GET: api/TravelPackages
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<TravelPackage>>> GetTravelPackages()
-        {
-            return await _context.TravelPackages.ToListAsync();
-        }
+        //[HttpGet]
+        //public async Task<ActionResult<IEnumerable<TravelPackage>>> GetTravelPackages()
+        //{
+        //    return await _context.TravelPackages.ToListAsync();
+        //}
 
         // GET: api/TravelPackages/5
         [HttpGet("{id}")]
@@ -103,6 +104,23 @@ namespace webapp_travel_agency.Controllers.Api
         private bool TravelPackageExists(int id)
         {
             return _context.TravelPackages.Any(e => e.Id == id);
+        }
+
+        [HttpGet]
+        public IActionResult GetTravelPackages(string? name)
+        {
+            IQueryable<TravelPackage> travelPackages;
+
+            if (name != null)
+            {
+                travelPackages = _context.TravelPackages.Where(package => package.Name.ToLower().Contains(name.ToLower()));
+            }
+            else
+            {
+                travelPackages = _context.TravelPackages;
+            }
+
+            return Ok(travelPackages.ToList<TravelPackage>());
         }
     }
 }

@@ -10,11 +10,13 @@ namespace webapp_travel_agency.Data
         {
         }
 
-        protected ApplicationDbContext()
+        public ApplicationDbContext()
         {
         }
 
         public DbSet<TravelPackage> TravelPackages { get; set; }
+
+        public DbSet<Message> Messages { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

@@ -2,18 +2,6 @@
 
 public class TravelPackage
 {
-    public TravelPackage()
-    {
-    }
-
-    public TravelPackage(string name, string description, int durationInNights, double price)
-    {
-        Name = name;
-        Description = description;
-        DurationInNights = durationInNights;
-        Price = price;
-    }
-
     public int Id { get; set; }
 
     [Required(ErrorMessage = "Il campo è obbligatorio")]
@@ -33,4 +21,10 @@ public class TravelPackage
     [Required(ErrorMessage = "Il campo è obbligatorio")]
     [Range(1, 20000, ErrorMessage = "Il prezzo non è valido")]
     public double Price { get; set; }
+
+    public List<Message> Messages { get; set; }
+    public TravelPackage()
+    {
+        Messages = new List<Message>();
+    }
 }

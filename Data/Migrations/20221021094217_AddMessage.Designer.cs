@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using webapp_travel_agency.Data;
 
@@ -11,9 +12,10 @@ using webapp_travel_agency.Data;
 namespace webapp_travel_agency.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221021094217_AddMessage")]
+    partial class AddMessage
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,14 +48,9 @@ namespace webapp_travel_agency.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("TravelPackageId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("TravelPackageId");
-
-                    b.ToTable("Messages");
+                    b.ToTable("Message");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -277,6 +274,9 @@ namespace webapp_travel_agency.Data.Migrations
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("MessageId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(25)
@@ -287,16 +287,9 @@ namespace webapp_travel_agency.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("MessageId");
+
                     b.ToTable("TravelPackages");
-                });
-
-            modelBuilder.Entity("Message", b =>
-                {
-                    b.HasOne("TravelPackage", "TravelPackage")
-                        .WithMany("Messages")
-                        .HasForeignKey("TravelPackageId");
-
-                    b.Navigation("TravelPackage");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -352,7 +345,16 @@ namespace webapp_travel_agency.Data.Migrations
 
             modelBuilder.Entity("TravelPackage", b =>
                 {
-                    b.Navigation("Messages");
+                    b.HasOne("Message", "Message")
+                        .WithMany("TravelPackages")
+                        .HasForeignKey("MessageId");
+
+                    b.Navigation("Message");
+                });
+
+            modelBuilder.Entity("Message", b =>
+                {
+                    b.Navigation("TravelPackages");
                 });
 #pragma warning restore 612, 618
         }

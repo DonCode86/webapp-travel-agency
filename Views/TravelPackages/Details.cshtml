@@ -42,6 +42,36 @@
         </dd>
     </dl>
 </div>
+<div>Messaggi:</div>
+    @if (Model.Messages.Count > 0) 
+    {
+        <table class="table container">
+        <thead>
+            <tr>
+                <th scope="col">Email</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Titolo</th>
+                <th scope="col">Testo</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (Message message in Model.Messages)
+        {
+                <tr>
+                    <td>@message.Email</td>
+                    <td>@message.Name</td>
+                    <td>@message.Title</td>
+                    <td>@message.Text</td>
+                </tr>
+        }
+
+        </tbody>
+    </table>
+    } else {
+        <p>Non ci sono messaggi da visualizzare!</p>
+    }
+    
+
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>

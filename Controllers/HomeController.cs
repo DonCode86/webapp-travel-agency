@@ -10,7 +10,10 @@ namespace webapp_travel_agency.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly ApplicationDbContext _context;
+
+        //private readonly ApplicationDbContext _context;
+
+        readonly ApplicationDbContext _context = new();
 
         public HomeController(ILogger<HomeController> logger)
         {
@@ -22,7 +25,7 @@ namespace webapp_travel_agency.Controllers
             return View();
         }
 
-        public IActionResult Details()
+        public IActionResult Details(int id)
         {
             return View();
         }

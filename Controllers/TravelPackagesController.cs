@@ -35,7 +35,7 @@ namespace webapp_travel_agency.Controllers
             }
 
             var travelPackage = await _context.TravelPackages
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .Include("Messages").FirstOrDefaultAsync(m => m.Id == id);
             if (travelPackage == null)
             {
                 return NotFound();

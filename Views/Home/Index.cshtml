@@ -1,16 +1,130 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Swiper demo</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"
+    />
+    <!-- Link Swiper's CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css"
+    />
+
+    <!-- Demo styles -->
+    <style>
+      html,
+      body {
+        position: relative;
+        height: 100%;
+      }
+
+      body {
+        background: #eee;
+        font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        color: #000;
+        margin: 0;
+        padding: 0;
+      }
+
+      .swiper {
+        width: 100%;
+        height: 400px;
+      }
+
+      .swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        background: #fff;
+
+        /* Center slide text vertically */
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+      }
+
+      .swiper-slide img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Swiper -->
+    <div class="swiper mySwiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+            <img src="https://wowslider.com/sliders/demo-77/data1/images/field175959_1920.jpg">
+        </div>
+        <div class="swiper-slide">
+            <img src="https://wallpapercave.com/wp/wp5561722.jpg">
+        </div>
+        
+        <div class="swiper-slide">
+            <img src="https://wallpapercave.com/wp/wp6481662.jpg">
+        </div>
+        <div class="swiper-slide"><img src="https://wallpapercave.com/wp/wp2767312.jpg"></div>
+        <div class="swiper-slide"><img src="https://wallpapercave.com/wp/wp4600617.jpg"></div>
+        <div class="swiper-slide"><img src="https://wallpapercave.com/wp/wp6384180.jpg"></div>
+        <div class="swiper-slide"><img src="https://wallpapercave.com/wp/wp8668919.jpg"></div>
+        <div class="swiper-slide"><img src="https://wallpapercave.com/wp/wp9616080.jpg"></div>
+        <div class="swiper-slide"><img src="https://wallpapercave.com/wp/wp9446880.jpg"></div>
+      </div>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-pagination"></div>
+    </div>
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+
+    <!-- Initialize Swiper -->
+    <script>
+      var swiper = new Swiper(".mySwiper", {
+        spaceBetween: 30,
+        centeredSlides: true,
+        autoplay: {
+          delay: 2500,
+          disableOnInteraction: false,
+        },
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+      });
+    </script>
+  </body>
+</html>
+
 <body onload="searchPackage()">
-    <div class="container">
+    <div class="container-fluid package-container">
     <div class="row">
         <div class="col-12">
-            <div class="d-flex justify-content-between align-items-center">
-                <h1 class="mt-3 mb-3">Lista pacchetti</h1>
-                <div>
-                    <input type="text" class="js_search form-control" placeholder="Cerca il tuo pacchetto">
-                </div>
-            </div>
+            <div class="d-flex justify-content-center">
+                <input type="text" class="js_search form-control my-3" placeholder="Cerca il tuo pacchetto">
+            </div>    
         </div>
     </div>
     <div class="row js_no_post text-center d-none">
@@ -56,16 +170,15 @@
                                         console.log('travelpackage', travelpackage);
                             document.querySelector('.js_post_table').innerHTML += 
                                 `
-                                <div class="col-12 col-md-4 p-2">
-                                    <div class="card post h-100">
-                                                  <a href="/Home/Details/${travelpackage.id}">
-                                                      <img src="${travelpackage.image}" class="card-img-top" alt="...">
-                                          <div class="card-body">
-                                                        <h5 class="card-title">${travelpackage.name}</h5>
-                                                        <p class="card-text">${travelpackage.description}</p>
-                                                        <p class="card-text">prezzo: ${travelpackage.price}</p>
-                                          </div>
-                                      </a>    
+                                <div class="col-12 col-md-4 p-2 d-flex justify-content-center">
+                                    <div class="card-post">
+                                        <a href="/Home/Details/${travelpackage.id}">
+                                            <img src="${travelpackage.image}" class="card-img" alt="...">
+                                            <div class="card-body">
+                                                <h5 class="card-title">${travelpackage.name}</h5>
+                                                <p class="card-text">prezzo:  ${travelpackage.price} €</p>
+                                            </div>
+                                        </a>
                                     </div>
                                 </div>
                                 `;
@@ -76,5 +189,49 @@
         </script>
 }
 
-stylelang
+<style>
+    .container {
+        width: 100vw;
+    }
+    .package-container {
+        
+        background-image: url("https://wallpapercave.com/wp/wp9616237.jpg");
+        background-size: cover;
+    }
+    .card-post {
+        position: relative;
+        width: 200px;
+    }
+
+    .card-body {
+        text-align: center;
+        color: white;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+        .card-body:hover {
+            cursor: pointer;
+
+        }
+
+    .card-img {
+      border-radius: 50%;
+      height:200px;
+      width:200px;
+      transition: transform .2s;
+    }
+
+    .card-img:hover {
+            transform: scale(1.1);
+            filter: brightness(0.5);
+    }
+
+    .js_search {
+        width: 25%;
+        text-align: center;
+    }
+</style>
 
